@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="Netstats.UI.Views.AboutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Netstats.UI.Views"
+             mc:Ignorable="d" 
+            >
+
+    <UserControl.Resources>
+        <Style TargetType="Ellipse" x:Key="EllipseStyle">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.8"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="253*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer>
+            <StackPanel>
+                <TextBlock Margin="15,0,0,0" Foreground="White" FontSize="18">AUI internet © Velvetta Inc 2017</TextBlock>
+                <TextBlock Margin="15,0,0,0" Foreground="White" FontSize="16">Version: 2.0.0.3</TextBlock>
+
+
+                <StackPanel Orientation="Vertical" Margin="0,20,0,0">
+                    <TextBlock FontSize="30" Margin="0,0,0,10" Foreground="Yellow" HorizontalAlignment="Center">The Developers</TextBlock>
+                    <Ellipse Height="170" Width="170" Margin="0,10,0,0" Style="{StaticResource EllipseStyle}">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/Resources/a.jpg" Stretch="Fill"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock Foreground="WhiteSmoke" FontSize="20" TextAlignment="Center"
+                               Text="Vangerwua Johnpaul"/>
+                    <TextBlock Foreground="WhiteSmoke" FontSize="20" TextAlignment="Center"
+                               Text="(C# / XAML) @KingThor"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="15,0,0,0" >
+                    <Ellipse Height="170" Width="170" Margin="0,10,0,0" Style="{StaticResource EllipseStyle}">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="/Resources/b.jpg" Stretch="Fill"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                    <TextBlock Foreground="WhiteSmoke" FontSize="20" TextAlignment="Center"
+                               Text="Edosa Kelvin (C# / HTML)"/>
+                    <TextBlock Foreground="WhiteSmoke" FontSize="20" TextAlignment="Center"
+                               Text="@KingKay"/>
+
+                    <TextBlock FontSize="30" Margin="0,30,0,10" Foreground="Yellow" HorizontalAlignment="Center">Special Thanks</TextBlock>
+                    <TextBlock Foreground="WhiteSmoke" FontSize="18" TextAlignment="Left"
+                               Text="Dr. Fashidemi" Margin="0,0,0,5"/>
+                    <TextBlock Foreground="WhiteSmoke" FontSize="18" TextAlignment="Left"
+                               Text="Dr. Rukewe"  Margin="0,0,0,5"/>
+                    <TextBlock Foreground="WhiteSmoke" FontSize="18" TextAlignment="Left"
+                               Text="Mbano Kizito"  Margin="0,0,0,5"/>
+                    <TextBlock Foreground="WhiteSmoke" FontSize="18" TextAlignment="Left"
+                               Text="Lamosime Otse"  Margin="0,0,0,5"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+
+        <!--<StackPanel Grid.Column="0" Grid.Row="1">
+            <TextBlock Foreground="WhiteSmoke" FontSize="25" TextAlignment="Center"
+                               Text="&lt;/Velvetta> 2017."/>
+        </StackPanel>-->
+    </Grid>
+</UserControl>

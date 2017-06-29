@@ -1,0 +1,71 @@
+﻿<Controls:MetroWindow x:Class="Netstats.UI.Views.MainWindow"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:views="clr-namespace:Netstats.UI.Views"
+                      mc:Ignorable="d"
+        Background="#34495e" ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen" 
+        Width="375" Height="550" TitleCaps="False" 
+        TitleAlignment="Left" 
+        Title="AUI Internet v2.0.0.3"
+        Icon="/Resources/aui_logo.png"
+        ShowIconOnTitleBar="False"
+        ShowInTaskbar="True">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="About" Command="{Binding ShowAboutViewCommand}"/>
+            <Button Content="Lock" Command="{Binding LockAppCommand}"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout Header="About"
+                             IsOpen="{Binding ShowAbout}"
+                             Position="Right"
+                             Theme="Inverse">
+                <views:AboutView Width ="375"/>
+            </Controls:Flyout>
+            
+            <Controls:Flyout x:Name="settingsflyout" Header="Settings"
+                             IsOpen="{Binding ShowSettings}"
+                             Position="Right"
+                             Theme="Inverse">
+                <views:SettingsView Width ="375"/>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="ContentRoot">
+            <Controls:TransitioningContentControl x:Name="Transitioning" Transition="Left" 
+                                                  Margin="0,0,0,70" 
+                                                  Grid.Row="0"/>
+            <!-- Bottom Watermark-->
+            <StackPanel Orientation="Horizontal" Grid.Row="1"  
+                        VerticalAlignment="Bottom" 
+                        HorizontalAlignment="Left" 
+                        Margin="40,0,0,30">
+                <TextBlock Text=" Made with" 
+                           Foreground="White" 
+                           FontSize="15"/>
+                <Rectangle Width="15" Height="15" 
+                           Grid.Row="1" 
+                           Fill="Red"
+                           Margin="4,0,0,0">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_cards_heart}" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+                <TextBlock Text=" and code by Velvetta© 2017" Foreground="White" FontSize="15"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>

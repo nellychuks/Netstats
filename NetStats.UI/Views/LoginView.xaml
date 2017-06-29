@@ -1,0 +1,81 @@
+﻿<UserControl  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:Custom="http://metro.mahapps.com/winfx/xaml/shared" x:Class="Netstats.UI.LoginView"
+                      Background="#34495e" Width="375">
+    <UserControl.Resources>
+        <Style TargetType="Rectangle" x:Key="RectangleStyle">
+            <Style.Triggers>
+                <Trigger Property="Control.IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="Fill" Value="WhiteSmoke"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+            <Style TargetType="Button" x:Key="FadeButtonStyle">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Opacity" Value="0.8"/>
+                    </Trigger>
+                    <!--<Trigger Property="IsMouseEnter" Value="True">
+                    <Setter Property="Opacity" Value="0.6"/>
+                </Trigger>-->
+                </Style.Triggers>
+            </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height
+                           ="*"/>
+        </Grid.RowDefinitions>
+        <Button Style="{StaticResource MetroCircleButtonStyle}" 
+                Width="40" Height="40" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" 
+                Margin="30,20,0,0"
+                Command="{Binding GoBackCommand}" ToolTip="Back">
+            <Button.Content>
+                <Rectangle Style="{StaticResource RectangleStyle}" Width="15" Height="15" Fill="#f1c40f">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Visual="{StaticResource appbar_navigate_previous}" Stretch="Fill"/>
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button.Content>
+        </Button>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+            <Image Source="/Resources/aui_logo.png" Height="170"  Width="220" HorizontalAlignment="Center"
+            	VerticalAlignment="Center" Stretch="Fill" Margin="0,20,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+            <TextBox x:Name="usernameTbox" Height="40" FontSize="15" 
+                     HorizontalAlignment="Stretch"
+                     Controls:TextBoxHelper.Watermark="username"
+                     Margin="40,20,40,0"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     BorderThickness="2"
+                     BorderBrush="#f1c40f"
+                     Controls:TextBoxHelper.ClearTextButton="True" 
+                     Text="{Binding Username}"/>
+
+            <PasswordBox x:Name="passwordTbox" Height="40" Margin="40,20,40,0" 
+                         HorizontalAlignment="Stretch" 
+                         Controls:TextBoxHelper.Watermark="password"
+                         HorizontalContentAlignment="Center" 
+                         VerticalContentAlignment="Center"
+                         BorderThickness="2" BorderBrush="#f1c40f"
+                         FontSize="15" Controls:TextBoxHelper.ClearTextButton="True">
+            </PasswordBox>
+
+            <Button x:Name="loginBtn" Height="50"  Background="#f1c40f" 
+                    Margin="40,20,40,0" Content="Login" Foreground="#2c3e50"
+                    BorderBrush="#34495e" IsDefault="True"
+                    Command="{Binding LoginCommand}" Style="{StaticResource FadeButtonStyle}"/>
+
+            <CheckBox Margin="40,20,0,0" Content="Remember Me" BorderBrush="#f1c40f"
+                      Foreground="WhiteSmoke" FontSize ="15" IsChecked="{Binding SaveUser}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

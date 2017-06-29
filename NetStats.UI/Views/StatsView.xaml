@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="NetStats.UI.StatsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NetStats.UI"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:Chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+             mc:Ignorable="d" 
+             d:DesignHeight="480" d:DesignWidth="370" Background="#34495e">
+
+    <Grid>
+        <TabControl>
+            <TabItem Header="Dashboard">
+                <StackPanel>
+                    <TextBlock Foreground="White" FontSize="20" VerticalAlignment="Center"
+                               HorizontalAlignment="Center" Margin="5,20,0,0" Text="Welcome Fashidemi!"/>
+                    <Chart:RadialGaugeChart x:Name="chart" ChartTitle="Percentage Used" ChartSubTitle="{Binding QuotaType}"
+                            Background="#34495e" Foreground="White" ChartLegendVisibility="Collapsed"
+                                            ChartTitleVisibility="Hidden"
+                            FontSize="13" VerticalAlignment="Stretch" >
+                        <Chart:RadialGaugeChart.Series>
+                            <Chart:ChartSeries SeriesTitle="MySeries" ValueMember="Value" DisplayMember="Category"
+                                   ItemsSource="{Binding Path = UsageChartPoints}" FontSize="15">
+                            </Chart:ChartSeries>
+                        </Chart:RadialGaugeChart.Series>
+                    </Chart:RadialGaugeChart>
+                </StackPanel>
+            </TabItem>
+            
+            <TabItem Header="Statistics">
+                <Chart:PieChart ChartTitle="Data Usage Summary" ChartSubTitle="{Binding QuotaType}"
+                                        Background="#34495e" Foreground="White" ChartLegendVisibility="Visible"
+                                        FontSize="13" VerticalAlignment="Stretch" >
+                    <Chart:PieChart.Series>
+                        <Chart:ChartSeries SeriesTitle="MySeries" ValueMember="Value" DisplayMember="Category"
+                                   ItemsSource="{Binding Path = UsageChartPoints}" FontSize="15">
+                        </Chart:ChartSeries>
+                    </Chart:PieChart.Series>
+                </Chart:PieChart>
+            </TabItem>
+            <TabItem Header="Settings">
+                <Button x:Name="logoutBtn" Content="Logout" Background="#ffd740" Height="55"
+        	    Foreground="#34495e" Grid.ColumnSpan="2" Grid.Row="1"
+                VerticalAlignment="Bottom" Margin="0,0,0,0"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
