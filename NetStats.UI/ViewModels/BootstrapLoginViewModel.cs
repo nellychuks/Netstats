@@ -4,6 +4,7 @@ using System.Reactive.Linq;
 using ReactiveUI;
 using Netstats.Core.Management;
 using System.Collections.Generic;
+using ReactiveUI.Legacy;
 
 namespace Netstats.UI.ViewModels
 {
@@ -14,7 +15,7 @@ namespace Netstats.UI.ViewModels
 
         public BootstrapLoginViewModel()
         {
-            ProccedToLoginCommand = ReactiveCommand.Create();
+            ProccedToLoginCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
             ProccedToLoginCommand.SubscribeOnDispatcher()
                                  .ObserveOnDispatcher()
                                  .Subscribe(x => ProceedToLogin(x as string));

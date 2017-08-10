@@ -3,6 +3,7 @@ using Netstats.Core;
 using Netstats.Core.Management;
 using Netstats.Core.Management.Interfaces;
 using ReactiveUI;
+using ReactiveUI.Legacy;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -74,7 +75,7 @@ namespace Netstats.UI
 
         public DashboardViewModel(ISession session) 
         {
-            LogoutCommand = ReactiveCommand.Create();
+            LogoutCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
             LogoutCommand.Subscribe(async x => await Logout());
             UsageChartPoints = new ObservableCollection<ChartPoint>();
             FeedUpdate = session.RefreshFeed.SubscribeOnDispatcher()
@@ -82,7 +83,7 @@ namespace Netstats.UI
                                             //we don't want to update the view with the same data 
                                             .DistinctUntilChanged(x => x.UsedBandwidth)
                                             .Subscribe(feed => UpdateChart(feed), async _ => await Logout(), () => Debug.WriteLine("Wow!"));
-            OpenSettingsCommand = ReactiveCommand.Create();
+            OpenSettingsCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
             OpenSettingsCommand.Subscribe(_ => NavigationHelper.MainWindow.settingsflyout.IsOpen = true);
 
         }

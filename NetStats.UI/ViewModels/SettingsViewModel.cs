@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MahApps.Metro.Controls.Dialogs;
 using Netstats.Core.Management;
+using ReactiveUI.Legacy;
 
 namespace Netstats.UI.ViewModels
 {
@@ -19,13 +20,13 @@ namespace Netstats.UI.ViewModels
 
         public SettingsViewModel()
         {
-            DeleteAccountCommand = ReactiveCommand.Create();
+            DeleteAccountCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
             DeleteAccountCommand.Subscribe(async _ => await DeleteAccount());
 
-            ChangeAccountAliasCommand = ReactiveCommand.Create();
+            ChangeAccountAliasCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
             ChangeAccountAliasCommand.Subscribe(async _ => await ChangeAccountAlias());
 
-            ChangeAppPinCommand = ReactiveCommand.Create();
+            ChangeAppPinCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
             ChangeAppPinCommand.Subscribe(async _ => await ChangeAppPin());
         }
 

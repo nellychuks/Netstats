@@ -7,6 +7,7 @@ using System.Reactive.Linq;
 using Netstats.UI.Views;
 using System.Threading;
 using Netstats.Core.Management;
+using ReactiveUI.Legacy;
 
 namespace Netstats.UI.ViewModels
 {
@@ -22,7 +23,7 @@ namespace Netstats.UI.ViewModels
         public PinEntryViewModel()
         {
             Pin = string.Empty;
-            UnlockCommand = ReactiveCommand.Create();
+            UnlockCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
             UnlockCommand.Subscribe(async _ =>
             {
                 await semaphore.WaitAsync();

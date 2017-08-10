@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ReactiveUI;
 using Netstats.UI;
 using System.Threading;
+using ReactiveUI.Legacy;
 
 namespace Netstats.UI
 {
@@ -17,9 +18,9 @@ namespace Netstats.UI
         public ShellViewModel()
         {
             gate = new SemaphoreSlim(1, 1);
-            ShowAboutViewCommand = ReactiveCommand.Create();
+            ShowAboutViewCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
             ShowAboutViewCommand.Subscribe(_ => ShowAbout = true);
-            LockAppCommand = ReactiveCommand.Create();
+            LockAppCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
             LockAppCommand.Subscribe(async _ => await LockApp());
         }
 

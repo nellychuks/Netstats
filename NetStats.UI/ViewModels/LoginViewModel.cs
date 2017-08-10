@@ -8,6 +8,7 @@ using System.Reactive.Linq;
 using Netstats.Core.Management;
 using Netstats.Core.Api.Exceptions;
 using System.Diagnostics;
+using ReactiveUI.Legacy;
 
 namespace Netstats.UI.ViewModels
 {
@@ -25,11 +26,11 @@ namespace Netstats.UI.ViewModels
 
         public LoginViewModel(User user)
         {
-            LoginCommand = ReactiveCommand.Create();
+            LoginCommand = ReactiveUI.ReactiveCommand.Create();
             LoginCommand.ObserveOnDispatcher()
                         .SubscribeOnDispatcher()
                         .Subscribe(async x => await Login());
-            GoBackCommand = ReactiveCommand.Create();
+            GoBackCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
             GoBackCommand.Subscribe(x => NavigationHelper.NavigateTo(ViewType.BootstrapLoginView, null));
 
             Username = user != null ? user?.Username : string.Empty;
