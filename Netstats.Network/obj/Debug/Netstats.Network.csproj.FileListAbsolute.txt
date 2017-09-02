@@ -1,0 +1,9 @@
+C:\Users\Mr. Melvin\Documents\GitHub\Netstats\Netstats.Network\bin\Debug\Netstats.Network.dll
+C:\Users\Mr. Melvin\Documents\GitHub\Netstats\Netstats.Network\bin\Debug\Netstats.Network.pdb
+C:\Users\Mr. Melvin\Documents\GitHub\Netstats\Netstats.Network\bin\Debug\AngleSharp.dll
+C:\Users\Mr. Melvin\Documents\GitHub\Netstats\Netstats.Network\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Mr. Melvin\Documents\GitHub\Netstats\Netstats.Network\bin\Debug\AngleSharp.xml
+C:\Users\Mr. Melvin\Documents\GitHub\Netstats\Netstats.Network\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Mr. Melvin\Documents\GitHub\Netstats\Netstats.Network\obj\Debug\Netstats.Network.dll
+C:\Users\Mr. Melvin\Documents\GitHub\Netstats\Netstats.Network\obj\Debug\Netstats.Network.pdb
+C:\Users\Mr. Melvin\Documents\GitHub\Netstats\Netstats.Network\obj\Debug\Netstats.Network.csprojResolveAssemblyReference.cache

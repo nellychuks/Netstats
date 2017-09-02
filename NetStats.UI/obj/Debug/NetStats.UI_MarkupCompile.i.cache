@@ -1,0 +1,20 @@
+﻿NetStats.UI
+
+
+winexe
+C#
+.cs
+C:\Users\Mr. Melvin\Documents\GitHub\Netstats\NetStats.UI\obj\Debug\
+NetStats.UI
+none
+false
+DEBUG;TRACE
+C:\Users\Mr. Melvin\Documents\GitHub\Netstats\NetStats.UI\App.xaml
+10-55441186
+2-1858429479
+2659376836
+87-665799347
+Views\AboutView.xaml;Views\BandwidthExceededView.xaml;Views\BootstrapLoginView.xaml;Views\LoginView.xaml;Resources\Icons.xaml;Resources\IconsNonShared.xaml;MainWindow.xaml;Views\DashboardView.xaml;Views\PinEntryView.xaml;Views\SettingsView.xaml;
+
+False
+
