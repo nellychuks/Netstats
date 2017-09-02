@@ -53,14 +53,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ApiTests.cs" />
     <Compile Include="SessionManagerTests.cs" />
     <Compile Include="PageDescriptorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Netstats.Core\Netstats.Core.csproj">
-      <Project>{c07ae3aa-a334-4ed2-ac8e-3b8b8f748669}</Project>
-      <Name>Netstats.Core</Name>
+    <ProjectReference Include="..\Netstats.Network\Netstats.Network.csproj">
+      <Project>{BCBFD36A-3233-449A-8289-CC00D05752E3}</Project>
+      <Name>Netstats.Network</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

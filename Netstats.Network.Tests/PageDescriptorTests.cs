@@ -1,34 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.IO;
 using AngleSharp.Dom.Html;
 using AngleSharp.Parser.Html;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Netstats.Core;
-using Netstats.Core.Api;
-using Netstats.Core.Network;
 
 namespace Netstats.Network.Tests
 {
     [TestClass]
     public class PageDescriptorTests
     {
-        static IHtmlDocument sessionPage { get; set; }
-        static IHtmlDocument confirmationPage { get; set; }
+        static IHtmlDocument SessionPage { get; set; }
+        static IHtmlDocument ConfirmationPage { get; set; }
         static IHtmlDocument AuthenticationFailedPage { get; set; }
         static IHtmlDocument LoggedoutPage { get; set; }
-        static Lazy<HtmlParser> singletonParser { get; } = new Lazy<HtmlParser>();
-        static HtmlParser SingletonParser { get { return singletonParser.Value; } }
+        static HtmlParser SingletonParser { get; set; } = new HtmlParser();
 
         [TestInitialize]
         public void Initialise()
         {
-            sessionPage      = SingletonParser.Parse(File.ReadAllText(@"sessionPage.html"));
-            confirmationPage = SingletonParser.Parse(File.ReadAllText(@"confirmationPage.html"));
+            SessionPage      = SingletonParser.Parse(File.ReadAllText(@"sessionPage.html"));
+            ConfirmationPage = SingletonParser.Parse(File.ReadAllText(@"confirmationPage.html"));
             AuthenticationFailedPage = SingletonParser.Parse(File.ReadAllText(@"authFailedPage.html"));
             LoggedoutPage    = SingletonParser.Parse(File.ReadAllText(@"logoutPage.html"));
         }
@@ -36,25 +26,25 @@ namespace Netstats.Network.Tests
         [TestMethod]
         public void DetectSessionPage()
         {
-            Assert.AreEqual(PageKind.SessionPage, PageDescriptor.Instance.Identify(sessionPage));
+            Assert.AreEqual(HtmlPageKind.SessionPage, HtmlPageDescriptor.Identify(SessionPage));
         }
 
         [TestMethod]
         public void DetectLoggedoutPage()
         {
-            Assert.AreEqual(PageKind.LoggedOutPage, PageDescriptor.Instance.Identify(LoggedoutPage));
+            Assert.AreEqual(HtmlPageKind.LoggedOutPage, HtmlPageDescriptor.Identify(LoggedoutPage));
         }
 
         [TestMethod]
         public void DetectConfirmationPage()
         {
-            Assert.AreEqual(PageKind.ConfirmationPage, PageDescriptor.Instance.Identify(confirmationPage));
+            Assert.AreEqual(HtmlPageKind.ConfirmationPage, HtmlPageDescriptor.Identify(ConfirmationPage));
         }
 
         [TestMethod]
         public void DetectAuthenticationFailedPage()
         {
-            Assert.AreEqual(PageKind.AuthenticationFailedPage, PageDescriptor.Instance.Identify(AuthenticationFailedPage));
+            Assert.AreEqual(HtmlPageKind.AuthenticationFailedPage, HtmlPageDescriptor.Identify(AuthenticationFailedPage));
         }
 
     }

@@ -81,7 +81,7 @@ namespace Netstats.UI
             FeedUpdate = session.RefreshFeed.SubscribeOnDispatcher()
                                             .ObserveOnDispatcher()
                                             //we don't want to update the view with the same data 
-                                            .DistinctUntilChanged(x => x.UsedBandwidth)
+                                            //.DistinctUntilChanged(x => x.UsedBandwidth)
                                             .Subscribe(feed => UpdateChart(feed), async _ => await Logout(), () => Debug.WriteLine("Wow!"));
             OpenSettingsCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
             OpenSettingsCommand.Subscribe(_ => NavigationHelper.MainWindow.settingsflyout.IsOpen = true);
@@ -96,7 +96,7 @@ namespace Netstats.UI
             UsageChartPoints.Clear();
             UsageChartPoints.Add(new ChartPoint() { Category = $"Up: {Upload}", Value = ToGigabyte(Upload) });
             UsageChartPoints.Add(new ChartPoint() { Category = $"Down: {Download}", Value = ToGigabyte(Download) });
-            UsageChartPoints.Add(new ChartPoint() { Category = $"Left: {ToGigabyte(TotalBandwidth) -ToGigabyte(CurrentBandwidth)} GB", Value = ToGigabyte(TotalBandwidth) - ToGigabyte(CurrentBandwidth) });
+            UsageChartPoints.Add(new ChartPoint() { Category = $"Left: {3d -ToGigabyte(CurrentBandwidth)} GB", Value = ToGigabyte(TotalBandwidth) - ToGigabyte(CurrentBandwidth) });
         }
 
         public async Task Logout()

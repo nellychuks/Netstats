@@ -95,15 +95,6 @@
     <Compile Include="Management\Interfaces\ISession.cs" />
     <Compile Include="Management\Interfaces\ISessionManager.cs" />
     <Compile Include="Management\SessionManager.cs" />
-    <Compile Include="Network\Api\DummyApi.cs" />
-    <Compile Include="Network\Api\INetworkApi.cs" />
-    <Compile Include="Network\PageMixins.cs" />
-    <Compile Include="Network\Api\Exceptions\ServerConnectionFailedException.cs" />
-    <Compile Include="Network\Api\UserSenseApi.cs" />
-    <Compile Include="Network\GenericPage.cs" />
-    <Compile Include="Network\IPage.cs" />
-    <Compile Include="Network\Api\Exceptions\LoginFailedException.cs" />
-    <Compile Include="Network\PageDescriptor.cs" />
     <Compile Include="Management\UserSessionFeed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Management\UserSenseSession.cs" />

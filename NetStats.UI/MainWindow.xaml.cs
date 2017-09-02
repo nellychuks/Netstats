@@ -40,7 +40,7 @@ namespace Netstats.UI.Views
 
         void SetupTrayIcon()
         {
-            notifyIcon.Icon = new Icon("aui_logo.png.ico");
+            //notifyIcon.Icon = new Icon("aui_logo.png.ico");
             notifyIcon.DoubleClick += (s,e) => WindowState = WindowState.Normal; 
         }
 

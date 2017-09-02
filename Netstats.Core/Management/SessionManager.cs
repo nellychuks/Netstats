@@ -80,22 +80,19 @@ namespace Netstats.Core.Management
 
         private async Task<ISession> Login(string username, string password, CancellationToken token)
         {
+            IPage response = null;
+
             try
             {
                 var responsestring = await NetworkApi.Login(username, password, token);
-                var response = PageMixins.ParsePage(responsestring);
+                response = PageMixins.ParsePage(responsestring);
 
                 /*Process confirm action*/
                 if (response.Kind == PageKind.ConfirmationPage)
                 {
                     responsestring = await NetworkApi.Login(username, password, token);
                     response = PageMixins.ParsePage(responsestring);
-                    ThrowIfNotSessionPage(response);
-                }
-                else
-                    ThrowIfNotSessionPage(response);
-                
-                return new UserSenseSession(PageMixins.ParseId(response), NetworkApi);
+                }   
             }
             catch (ServerConnectionFailedException ex)
             {
@@ -105,6 +102,8 @@ namespace Netstats.Core.Management
             {
                 throw new LoginFailedException(SessionCreateFailReaon.Unknown, ex);
             }
+            ThrowIfNotSessionPage(response);
+            return new UserSenseSession(PageMixins.ParseId(response), NetworkApi);
         }
 
         public void ThrowIfNotSessionPage(IPage page)

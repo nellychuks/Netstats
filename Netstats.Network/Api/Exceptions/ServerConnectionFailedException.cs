@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Netstats.Core.Api.Exceptions
+namespace Netstats.Api.Exceptions
 {
     public class ServerConnectionFailedException : Exception
     {

@@ -43,23 +43,26 @@
             <TextBlock FontSize="20" Foreground="LightGray" Grid.Row="0"
                                Margin="10,10,0,0">Quota Type: Monthly</TextBlock>
 
-            <TextBlock Text="{Binding PercentageBandwidth}" 
+            <!--<TextBlock Text="{Binding PercentageBandwidth}" 
                                    HorizontalAlignment="Center" 
                                    Margin="0,120,0,0"
                                    FontSize="60" Foreground="LightGray"
                                    FontFamily="monaco" Grid.Row="1" 
-                                   Panel.ZIndex="1"/>
-            <!--<Chart:DoughnutChart  ChartSubTitle="{Binding QuotaType}" Grid.Row="1"
-                                  Background="#34495e" Foreground="White" ChartTitleVisibility="Collapsed"
+                                   Panel.ZIndex="1"/>-->
+            <Chart:DoughnutChart  ChartSubTitle="{Binding QuotaType}" Grid.Row="1"
+                                  Background="#34495e" Foreground="White" 
+                                  ChartTitleVisibility= "Collapsed"
                                   InnerRadiusRatio="0.7"
                                   VerticalAlignment="Stretch" 
                                   HorizontalAlignment="Stretch" FontSize="13">
                 <Chart:DoughnutChart.Series>
                     <Chart:ChartSeries ValueMember="Value" DisplayMember="Category" SeriesTitle="My Title"
-                                   ItemsSource="{Binding Path = UsageChartPoints}">
+                                   ItemsSource="{Binding Path = UsageChartPoints}" 
+                                   HorizontalAlignment="Stretch" 
+                                   VerticalAlignment="Stretch">
                     </Chart:ChartSeries>
                 </Chart:DoughnutChart.Series>
-            </Chart:DoughnutChart>-->
+            </Chart:DoughnutChart>
             <Button Content="Logout" Background="#ffd740" Height="55"
         	    Foreground="#34495e" Grid.Row="2" Command="{Binding LogoutCommand}"
                 VerticalAlignment="Bottom"/>

@@ -26,11 +26,10 @@ namespace Netstats.UI.ViewModels
 
         public LoginViewModel(User user)
         {
-            LoginCommand = ReactiveUI.ReactiveCommand.Create();
-            LoginCommand.ObserveOnDispatcher()
-                        .SubscribeOnDispatcher()
-                        .Subscribe(async x => await Login());
+            LoginCommand = ReactiveUI.ReactiveCommand.CreateFromTask(Login);
+                       
             GoBackCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
+      
             GoBackCommand.Subscribe(x => NavigationHelper.NavigateTo(ViewType.BootstrapLoginView, null));
 
             Username = user != null ? user?.Username : string.Empty;
@@ -45,8 +44,8 @@ namespace Netstats.UI.ViewModels
             }
         }
 
-        public ReactiveCommand<object> LoginCommand { get; private set; }
-        public ReactiveCommand<object> GoBackCommand { get; private set; }
+        public ReactiveUI.ReactiveCommand LoginCommand { get; private set; }
+        public ReactiveUI.Legacy.ReactiveCommand<object> GoBackCommand { get; private set; }
 
         public User User { get; }
 
@@ -133,10 +132,6 @@ namespace Netstats.UI.ViewModels
                 await waitDialog.CloseAsync();
                 await NavigationHelper.MainWindow.ShowMessageAsync("Opps!", "An Unknown error occurred");
                 Debug.WriteLine(ex.Message);
-            }
-            finally
-            {
-                Monitor.Exit(gate);
             }
         }
     }
