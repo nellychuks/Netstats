@@ -50,11 +50,11 @@ namespace Netstats.Network.Api
             // Construct a simple annon object for holding the data
             var graph = new
             {
-                TotalBandwidth = HtmlPageMixins.GetAllSiblings(response, "td.para1", "Group Allowed Bandwidth: ")
+                Total = HtmlPageMixins.GetAllSiblings(response, "td.para1", "Group Allowed Bandwidth:")
                                    .Select(x => x.TextContent)
                                    .FirstOrDefault(),
 
-                UsedBandwidth = HtmlPageMixins.GetAllSiblings(response, "td.para1", "Total Bandwidth:")
+                Used = HtmlPageMixins.GetAllSiblings(response, "td.para1", "Total Bandwidth:")
                                    .Select(x => x.TextContent)
                                    .FirstOrDefault(),
 

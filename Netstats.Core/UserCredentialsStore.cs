@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 
-namespace Netstats.Core.Management
+namespace Netstats.Core
 {
     public class UserCredentialsStore
     {
