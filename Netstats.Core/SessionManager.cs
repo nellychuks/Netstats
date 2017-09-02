@@ -21,6 +21,12 @@ namespace Netstats.Core
             LoginGate = new SemaphoreSlim(1, 1);
         }
 
+        public SessionManager(DummyNetworkApi dummyNetworkApi, Type type)
+        {
+            this.dummyNetworkApi = dummyNetworkApi;
+            this.type = type;
+        }
+
         public ISession CurrentSession { get { return currentSession; } }
 
         public INetworkApi NetworkApi { get; set; }
@@ -33,8 +39,7 @@ namespace Netstats.Core
 
         public async Task<ISession> CreateSession(string username, string password, CancellationToken token)
         {
-            if (!await LoginGate.WaitAsync(50))
-                throw new Exception("Already processing a request");
+            LoginGate.Wait();
 
             if (!ValidateLoginCredentials(username, password))
                 throw new ArgumentException("user credentials");
@@ -42,7 +47,7 @@ namespace Netstats.Core
             /*We don't want any lingering sessions. This is not entirely necessary but it's nice
             to keep things tidy*/
             if (HasActiveSession)
-                await DestroyCurrentSession();
+                await DestroyCurrentSessionAsync();
 
             try
             {
@@ -50,10 +55,9 @@ namespace Netstats.Core
                 // Parse id token from json response
                 var response = JsonConvert.DeserializeAnonymousType(json, new { Id = string.Empty });
 
-#pragma warning disable CS1974 // Dynamically dispatched call may fail at runtime because one or more applicable overloads are conditional methods
-                Debug.WriteLine(response.Id);
-#pragma warning restore CS1974 // Dynamically dispatched call may fail at runtime because one or more applicable overloads are conditional methods
-                return new UserSenseSession(response.Id, new CoreSettings(), NetworkApi);
+                currentSession = new UserSenseSession(response.Id, new CoreSettings(), NetworkApi);
+
+                return currentSession;
             }
             catch (Exception ex)
             {
@@ -69,9 +73,10 @@ namespace Netstats.Core
 
         public Task<ISession> CreateSession(string username, string password) => CreateSession(username, password, CancellationToken.None);
 
-        private Task DestroyCurrentSession()
+        public async Task DestroyCurrentSessionAsync()
         {
-            throw new NotImplementedException();
+            await NetworkApi.Logout(currentSession.Id);
+            currentSession = null;
         }
 
         #region Static Members
@@ -80,6 +85,9 @@ namespace Netstats.Core
         {
             return new SessionManager(new DummyNetworkApi());
         });
+        private DummyNetworkApi dummyNetworkApi;
+        private Type type;
+
         public static SessionManager Instance { get { return instance.Value; } }
 
         #endregion

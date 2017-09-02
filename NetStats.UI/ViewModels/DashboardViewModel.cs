@@ -1,9 +1,8 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
 using Netstats.Core;
-using Netstats.Core.Management;
-using Netstats.Core.Management.Interfaces;
+using Netstats.Core.Interfaces;
 using ReactiveUI;
-using ReactiveUI.Legacy;
+using Splat;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -17,13 +16,18 @@ namespace Netstats.UI
     public class DashboardViewModel :ReactiveObject, IDisposable
     {
         IDisposable FeedUpdate { get; }
-        public ReactiveCommand<object> LogoutCommand { get; }
-        public ReactiveCommand<object> OpenSettingsCommand { get; set; }
-        public ObservableCollection<ChartPoint> UsageChartPoints { get; set; }
-        public UserSenseSession Session { get; }
-        private SemaphoreSlim semaphore { get; } = new SemaphoreSlim(1, 1);
-        private bool showSettings;
 
+        public ReactiveCommand LogoutCommand { get; }
+
+        public ReactiveCommand OpenSettingsCommand { get; set; }
+
+        public ObservableCollection<ChartPoint> UsageChartPoints { get; set; }
+
+        public UserSenseSession Session { get; }
+
+        private SemaphoreSlim Semaphore { get; } = new SemaphoreSlim(1, 1);
+
+        private bool showSettings;
         public bool ShowSettings
         {
             get { return showSettings; }
@@ -32,24 +36,29 @@ namespace Netstats.UI
 
         public string TotalBandwidth
         {
-            get { return CurrentFeed.TotalBandwidth; }
+            get { return CurrentFeed.Total; }
         }
+
         public BandwidthQuotaType QuotaType
         {
             get { return CurrentFeed.QuotaType; }
         }
+
         public string CurrentBandwidth
         {
-            get { return CurrentFeed.UsedBandwidth; }
+            get { return CurrentFeed.Used; }
         }
+
         public string Upload
         {
             get { return CurrentFeed.Upload; }
         }
+
         public string Download
         {
             get { return CurrentFeed.Download; }
         }
+
         public string PercentageBandwidth
         {
             get
@@ -75,24 +84,24 @@ namespace Netstats.UI
 
         public DashboardViewModel(ISession session) 
         {
-            LogoutCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
-            LogoutCommand.Subscribe(async x => await Logout());
+            LogoutCommand = ReactiveCommand.Create(async () => await Logout());
+
             UsageChartPoints = new ObservableCollection<ChartPoint>();
+
             FeedUpdate = session.RefreshFeed.SubscribeOnDispatcher()
                                             .ObserveOnDispatcher()
                                             //we don't want to update the view with the same data 
-                                            //.DistinctUntilChanged(x => x.UsedBandwidth)
-                                            .Subscribe(feed => UpdateChart(feed), async _ => await Logout(), () => Debug.WriteLine("Wow!"));
-            OpenSettingsCommand = ReactiveUI.Legacy.ReactiveCommand.Create();
-            OpenSettingsCommand.Subscribe(_ => NavigationHelper.MainWindow.settingsflyout.IsOpen = true);
+                                            .DistinctUntilChanged(x => x.Used)
+                                            .Subscribe(feed => UpdateChartPoints(feed), async _ => await Logout(), () => Debug.WriteLine("Wow!"));
 
+            OpenSettingsCommand = ReactiveCommand.Create(() => NavigationHelper.MainWindow.settingsflyout.IsOpen = true);
         }
 
         public void Dispose() => FeedUpdate.Dispose();
 
-        public void UpdateChart(ISessionFeed latestFeed)
+        public void UpdateChartPoints(ISessionFeed feed)
         {
-            CurrentFeed = latestFeed;
+            CurrentFeed = feed;
             UsageChartPoints.Clear();
             UsageChartPoints.Add(new ChartPoint() { Category = $"Up: {Upload}", Value = ToGigabyte(Upload) });
             UsageChartPoints.Add(new ChartPoint() { Category = $"Down: {Download}", Value = ToGigabyte(Download) });
@@ -101,21 +110,26 @@ namespace Netstats.UI
 
         public async Task Logout()
         {
-            if (!await semaphore.WaitAsync(50))
+            if (!await Semaphore.WaitAsync(50))
                 return;
             try
             {
-                if (!SessionManager.Instance.HasActiveSession)
+                if (Locator.Current.GetService<ISessionManager>().CurrentSession == null)
                     return;
-                Dispose(); 
-                await SessionManager.Instance.DestroyActiveSession();
+
+                Dispose();
+
+                await Locator.Current.GetService<ISessionManager>().DestroyCurrentSessionAsync();
+
                 await NavigationHelper.MainWindow.ShowMessageAsync("Alert", "You have been logged out!");
+
                 Global.CurrentUser = null;
+
                 NavigationHelper.NavigateTo(ViewType.BootstrapLoginView, null);
             }
             finally
             {
-                semaphore.Release();
+                Semaphore.Release();
             }
         }
     }

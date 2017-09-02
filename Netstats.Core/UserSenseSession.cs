@@ -15,22 +15,22 @@ namespace Netstats.Core
         {
             Id = id;
             NetworkApi = networkApi;
-            /*start refreshing three second after and keep refrshing at equal intervals*/
+            /*start refreshing after 1.5s after and keep refrshing at equal intervals*/
             RefreshFeed = Observable.Timer(TimeSpan.FromSeconds(1.5), settings.RefreshInterval)
                                     .Select(_ => GetLatestFeedAsync());
         }
 
         public string Id { get; }
 
-        public IObservable<UserSenseSessionFeed> RefreshFeed { get; }
+        public IObservable<ISessionFeed> RefreshFeed { get; }
 
         public CoreSettings Settings { get; }
 
-        public UserSenseSessionFeed GetLatestFeedAsync()
+        public ISessionFeed GetLatestFeedAsync()
         {
             var json = NetworkApi.Refresh(Id).Result;
 
-            return JsonConvert.DeserializeObject<UserSenseSessionFeed>(json);
+            return JsonConvert.DeserializeObject<UserSenseSessionFeed>(json) as ISessionFeed;
         }
     }
 }

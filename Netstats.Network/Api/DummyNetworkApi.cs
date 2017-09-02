@@ -8,6 +8,14 @@ using Netstats.Network.Api.Interfaces;
 
 namespace Netstats.Network.Api
 {
+    //===============================================================================
+    // Copyright © Edosa Kelvin.  All rights reserved.
+    // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY
+    // OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT
+    // LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+    // FITNESS FOR A PARTICULAR PURPOSE.
+    //===============================================================================
+
     public class DummyNetworkApi : INetworkApi
     {
         private static string SessionPage { get; }
@@ -34,7 +42,7 @@ namespace Netstats.Network.Api
 
         public async Task<string> Login(string username, string password, CancellationToken token)
         {
-            await Task.Delay(TimeSpan.FromSeconds(1), token);
+            await Task.Delay(TimeSpan.FromSeconds(2), token);
             var response = await HtmlPageMixins.ParsePageAsync(SessionPage);
 
             // Json will contain the session id of the current session and will

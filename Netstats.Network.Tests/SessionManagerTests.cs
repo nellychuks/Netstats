@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Netstats.Core.Interfaces;
 using Netstats.Network.Api;
-using System.Threading.Tasks;
 
 namespace Netstats.Core.Tests
 {

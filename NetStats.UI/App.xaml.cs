@@ -1,4 +1,8 @@
 ﻿using MahApps.Metro;
+using Netstats.Core;
+using Netstats.Core.Interfaces;
+using Netstats.Network.Api;
+using Splat;
 using System.Windows;
 
 namespace Netstats.UI
@@ -8,8 +12,6 @@ namespace Netstats.UI
     /// </summary>
     public partial class App : Application
     {
-        //Mutex mutex = new Mutex(true, "Netstats");
-
         protected override void OnStartup(StartupEventArgs e)
         {
             //// get the current app style (theme and accent) from the application
@@ -19,14 +21,17 @@ namespace Netstats.UI
             // now set the Green accent and dark theme
             ThemeManager.ChangeAppStyle(Current,
                                         ThemeManager.GetAccent("Steel"),
-                                        ThemeManager.GetAppTheme("BaseLight")); // or appStyle.Item1
-                                                                                //Mutext checking 
-                                                                                //if (!mutex.WaitOne(TimeSpan.FromSeconds(3)))
-                                                                                //    Shutdown();
-                                                                                //else
+                                        ThemeManager.GetAppTheme("BaseLight"));
+            RegisterServices();
             base.OnStartup(e);
         }
 
+        private void RegisterServices()
+        {
+            Locator.CurrentMutable.RegisterLazySingleton(() => new SessionManager(new DummyNetworkApi()), typeof(ISessionManager));
+
+            Locator.CurrentMutable.RegisterLazySingleton(() => new UserCredentialsStore(), typeof(UserCredentialsStore));
+        }
         protected override void OnExit(ExitEventArgs e)
         {
             //mutex.ReleaseMutex();

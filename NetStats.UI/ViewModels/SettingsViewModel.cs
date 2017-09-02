@@ -6,7 +6,6 @@ using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MahApps.Metro.Controls.Dialogs;
-using Netstats.Core.Management;
 using ReactiveUI.Legacy;
 
 namespace Netstats.UI.ViewModels
@@ -55,7 +54,7 @@ namespace Netstats.UI.ViewModels
             var newAlias = await NavigationHelper.MainWindow.ShowInputAsync("Alert", $"Enter alias");
             if (newAlias == null)
                 return;
-            if(await UserCredentialsStore.Instance.HasUserAlias(newAlias))
+            if(await UserCredentialsStore.Instance.IsUserAliasStored(newAlias))
             {
                 await NavigationHelper.MainWindow.ShowMessageAsync("Error", "Alias is already in use by another account");
                 return;

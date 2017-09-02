@@ -2,11 +2,10 @@
 using MahApps.Metro.Controls;
 using System;
 using System.Windows.Forms;
-using System.Drawing;
 using System.Windows;
 using MahApps.Metro.Controls.Dialogs;
-using Netstats.Core.Management;
 using Akavache;
+using Netstats.Core;
 
 namespace Netstats.UI.Views
 {
@@ -74,6 +73,7 @@ namespace Netstats.UI.Views
                 var response = await this.ShowMessageAsync("Alert", $"Currently logged in as {Global.CurrentUser}. Do you want to logout first?", MessageDialogStyle.AffirmativeAndNegative);
                 if (response == MessageDialogResult.Affirmative)
                 {
+
                     await ((DashboardViewModel)NavigationHelper.Views[ViewType.DashboardView].DataContext).Logout();
                     Global.CurrentUser = null;
                     Close();

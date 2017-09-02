@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Netstats.Core
 {
-    class DataUsageAnalyser
+    class BandwidthUsageAnalyser
     {
     }
 }

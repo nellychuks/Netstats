@@ -88,8 +88,8 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.3.0.823, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.3.0.823\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="ReactiveUI, Version=7.4.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -148,6 +148,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\AccounViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\PinEntryViewModel.cs" />
@@ -158,7 +159,6 @@
     <Compile Include="Global.cs" />
     <Compile Include="NavigationHelper.cs" />
     <Compile Include="Utilities.cs" />
-    <Compile Include="ViewModels\BootstrapLoginViewModel.cs" />
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Views\BandwidthExceededView.xaml.cs">
@@ -304,6 +304,10 @@
     <ProjectReference Include="..\Netstats.Core\Netstats.Core.csproj">
       <Project>{c07ae3aa-a334-4ed2-ac8e-3b8b8f748669}</Project>
       <Name>Netstats.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Netstats.Network\Netstats.Network.csproj">
+      <Project>{BCBFD36A-3233-449A-8289-CC00D05752E3}</Project>
+      <Name>Netstats.Network</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

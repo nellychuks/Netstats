@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 
 namespace Netstats.Core
 {
@@ -32,16 +33,11 @@ namespace Netstats.Core
 
         public IObservable<Unit> DeleteAllusers() => BlobCache.Secure.InvalidateAllObjects<User>();
 
-        public IObservable<bool> HasUserAlias(string alias) => GetUserNames().Any(x => x.Contains(alias));
+        public IObservable<bool> IsUserAliasStored(string alias) => GetUserNames().Any(x => x.Contains(alias));
 
-        public IObservable<bool> HasUsername(string username)
+        public IObservable<bool> IsUsernameStored(string username)
         {
-            foreach (var user in GetUsers().First())
-            {
-                if (user.Username == username)
-                    return Observable.Return(true);
-            }
-            return Observable.Return(false);
+            return GetUserNames().Any(x => x.Contains(username));
         }
 
         public void ShutDown() => BlobCache.Shutdown().Wait();

@@ -11,12 +11,20 @@ using Netstats.Network.Api.Interfaces;
 
 namespace Netstats.Network.Api
 {
+    //===============================================================================
+    // Copyright © Edosa Kelvin.  All rights reserved.
+    // THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY
+    // OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT
+    // LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+    // FITNESS FOR A PARTICULAR PURPOSE.
+    //===============================================================================
+
     /// <summary>
     /// Provides a host of members for interacting with the Usersense internet service
     /// </summary>
     public class UserSenseNetworkApi : INetworkApi
     {
-        static string requestUri = "/cgi-bin/user_session.ggi";
+        static readonly string requestUri = "/cgi-bin/user_session.ggi";
 
         public HttpClient NetworkClient { get; } = null;
 
@@ -84,8 +92,6 @@ namespace Netstats.Network.Api
 
         public async Task<string> ConfirmLogin(string username, string password, string delete = "yes") => await ConfirmLogin(username, password, CancellationToken.None, delete);
 
-        public async Task<string> Refresh(string sessionId) => await Refresh(sessionId, CancellationToken.None);
-
         public async Task<string> Refresh(string sessionId, CancellationToken token)
         {
             var data = new Dictionary<string, string>()
@@ -125,6 +131,8 @@ namespace Netstats.Network.Api
             // need to be included in subsequent server call
             return JsonConvert.SerializeObject(resultGraph, Formatting.Indented);
         }
+
+        public async Task<string> Refresh(string sessionId) => await Refresh(sessionId, CancellationToken.None);
 
         public async Task<string> Logout(string sessionId, CancellationToken token)
         {

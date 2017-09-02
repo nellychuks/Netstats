@@ -1,5 +1,5 @@
-﻿using Netstats.Core.Management;
-using Netstats.Core.Management.Interfaces;
+﻿using Netstats.Core;
+using Netstats.Core.Interfaces;
 using Netstats.UI.ViewModels;
 using Netstats.UI.Views;
 using System;
@@ -43,7 +43,7 @@ namespace Netstats.UI
             switch (view)
             {
                 case ViewType.BootstrapLoginView:
-                    Views[ViewType.BootstrapLoginView].DataContext = new BootstrapLoginViewModel();
+                    Views[ViewType.BootstrapLoginView].DataContext = new AccountViewModel();
                     MainWindow.Transitioning.Content = Views[ViewType.BootstrapLoginView];
                     break;
 

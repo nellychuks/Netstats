@@ -1,4 +1,4 @@
-﻿using Netstats.Core.Management;
+﻿using Netstats.Core;
 using System;
 using System.Collections.Generic;
 

@@ -2,7 +2,7 @@
 
 namespace Netstats.Core
 {
-    public class UserSenseSessionFeed : IEquatable<UserSenseSessionFeed>
+    public class UserSenseSessionFeed :ISessionFeed,  IEquatable<UserSenseSessionFeed>
     {
         public string Total { get; set; } = "0.0 MB";
 

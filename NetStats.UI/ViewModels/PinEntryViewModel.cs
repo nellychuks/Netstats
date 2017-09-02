@@ -1,12 +1,10 @@
 ﻿using System;
 using ReactiveUI;
-using Netstats.UI;
 using MahApps.Metro.Controls.Dialogs;
 using Netstats.Core;
 using System.Reactive.Linq;
 using Netstats.UI.Views;
 using System.Threading;
-using Netstats.Core.Management;
 using ReactiveUI.Legacy;
 
 namespace Netstats.UI.ViewModels

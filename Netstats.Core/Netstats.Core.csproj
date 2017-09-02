@@ -93,7 +93,7 @@
   <ItemGroup>
     <Compile Include="AkavacheSqliteLinkerOverride.cs" />
     <Compile Include="BandwidthQuotaType.cs" />
-    <Compile Include="DataUsageAnalyser.cs" />
+    <Compile Include="BandwidthUsageAnalyser.cs" />
     <Compile Include="Interfaces\ISessionFeed.cs" />
     <Compile Include="SessionSettings.cs" />
     <Compile Include="UserCredentialsStore.cs" />
